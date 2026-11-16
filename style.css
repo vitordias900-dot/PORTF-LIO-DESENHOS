@@ -1,0 +1,115 @@
+:root {
+  --fundo: #828080;
+  --fundo-2: #161616;
+  --texto: #f2f2f2;
+  --destaque: #c8102e;      /* vermelho; troque pela cor que ele preferir */
+  --destaque-hover: #e0203f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--fundo);
+  color: var(--texto);
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgba(13, 13, 13, 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-link:hover {
+  color: var(--destaque) !important;
+}
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  padding-top: 70px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)),
+    url("../img/hero.jpg") center / cover no-repeat;
+}
+
+.destaque {
+  color: var(--destaque);
+}
+
+/* Botões */
+.btn-destaque {
+  background-color: var(--destaque);
+  border-color: var(--destaque);
+  color: #fff;
+}
+
+.btn-destaque:hover {
+  background-color: var(--destaque-hover);
+  border-color: var(--destaque-hover);
+  color: #fff;
+}
+
+/* Seções */
+.titulo-secao {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.titulo-secao::after {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 3px;
+  background-color: var(--destaque);
+  margin-top: 6px;
+}
+
+.text-center .titulo-secao::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.secao-escura {
+  background-color: var(--fundo-2);
+}
+
+/* Galeria */
+.item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+}
+
+.item img:hover {
+  transform: scale(1.04);
+  filter: brightness(1.15);
+}
+
+/* Filtro: item escondido pelo TypeScript */
+.item.oculto {
+  display: none;
+}
+
+#filtros .btn.active {
+  background-color: var(--destaque);
+  border-color: var(--destaque);
+  color: #fff;
+}
+
+/* Rodapé */
+.rodape {
+  background-color: #000;
+  color: #888;
+}
