@@ -4,7 +4,13 @@
     "lib": ["es2020", "dom"],
     "rootDir": "src",
     "outDir": "js",
-    "strict": true
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmitOnError": true,
+    "sourceMap": true
   },
   "include": ["src"]
 }

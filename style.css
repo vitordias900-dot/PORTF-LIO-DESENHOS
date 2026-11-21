@@ -1,8 +1,8 @@
 :root {
-  --fundo: #828080;
+  --fundo: #5f5d5d;          /* cinza com contraste adequado para o texto claro */
   --fundo-2: #161616;
   --texto: #f2f2f2;
-  --destaque: #c8102e;      /* vermelho; troque pela cor que ele preferir */
+  --destaque: #c8102e;       /* vermelho; troque pela cor que ele preferir */
   --destaque-hover: #e0203f;
 }
 
@@ -14,6 +14,19 @@ body {
   background-color: var(--fundo);
   color: var(--texto);
   font-family: "Poppins", system-ui, sans-serif;
+}
+
+/* Evita que a navbar fixa cubra o título da seção ao navegar pelo menu */
+section,
+header {
+  scroll-margin-top: 70px;
+}
+
+/* Foco visível para navegação por teclado */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--destaque-hover);
+  outline-offset: 3px;
 }
 
 /* Navbar */
@@ -28,33 +41,42 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--destaque) !important;
+  color: var(--destaque-hover) !important;
 }
 
 /* Hero */
 .hero {
   min-height: 100vh;
+  min-height: 100svh;
   padding-top: 70px;
   background:
     linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)),
-    url("../img/fotofundo.png") center / cover no-repeat;
+    url("img/fotofundo.png") center / cover no-repeat;
 }
 
 .destaque {
-  color: var(--destaque);
+  color: var(--destaque-hover);
 }
 
 /* Botões */
+
 .btn-destaque {
   background-color: var(--destaque);
   border-color: var(--destaque);
   color: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
 .btn-destaque:hover {
   background-color: var(--destaque-hover);
   border-color: var(--destaque-hover);
   color: #fff;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(200, 16, 46, 0.45);
+}
+
+.btn-destaque:active {
+  transform: translateY(-1px);
 }
 
 /* Seções */
@@ -64,8 +86,6 @@ body {
   position: relative;
   display: inline-block;
 }
-
-
 
 .titulo-secao::after {
   content: "";
@@ -85,35 +105,22 @@ body {
   background-color: var(--fundo-2);
 }
 
-/* Galeria */
-.item img {
+/* Carrossel */
+.carrossel {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.carrossel .carousel-item img {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  cursor: pointer;
+  height: min(500px, 70vh);
+  object-fit: contain;
+  background-color: #000;
+  border-radius: 12px;
 }
 
-.item img:hover {
-  transform: scale(1.04);
-  filter: brightness(1.15);
-}
-
-/* Filtro: item escondido pelo TypeScript */
-.item.oculto {
-  display: none;
-}
-
-#filtros .btn.active {
-  background-color: var(--destaque);
-  border-color: var(--destaque);
-  color: #fff;
-}
-
-/* Rodapé */
-.rodape {
-  background-color: #c6b9b9;
-  color: #888;
+.carousel-indicators [data-bs-target] {
+  background-color: var(--destaque-hover);
 }
 
 /* Contato */
@@ -124,14 +131,14 @@ body {
   gap: 6px;
   padding: 1.5rem 1rem;
   background-color: var(--fundo-2);
-  border: 1px solid rgba(121, 20, 20, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   color: var(--texto);
 }
 
 .card-contato i {
   font-size: 2.2rem;
-  color: var(--destaque);
+  color: var(--destaque-hover);
 }
 
 .card-contato .valor {
@@ -139,31 +146,29 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Carrossel */
-.carrossel {
-  max-width: 720px;
-  margin: 0 auto;
+a.card-contato {
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.carrossel .carousel-item img {
-  width: 100%;
-  height: 500px;
-  object-fit: contain;
-  background-color: #000;
-  border-radius: 12px;
+a.card-contato:hover {
+  transform: translateY(-4px);
+  border-color: var(--destaque);
+  color: var(--texto);
 }
 
-.carousel-indicators [data-bs-target] {
-  background-color: var(--destaque);
+/* Rodapé */
+.rodape {
+  background-color: var(--fundo-2);
+  color: #b5b5b5;
 }
 
 /* Fade-in da frase */
-
 .fade-1 {
   display: inline-block;
   opacity: 0;
-  animation: aparecer 1.2s ease forwards;
-  animation-delay: 0.3s;
+  animation: aparecer 3.2s ease forwards;
+  animation-delay: 0.8s;
 }
 
 @keyframes aparecer {
@@ -177,13 +182,19 @@ body {
   }
 }
 
-a.card-contato {
-  text-decoration: none;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .fade-1 {
+    animation: none;
+    opacity: 1;
+  }
+
+  a.card-contato {
+    transition: none;
+  }
 }
 
-a.card-contato:hover {
-  transform: translateY(-4px);
-  border-color: var(--destaque);
-  color: var(--texto);
-}
