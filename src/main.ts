@@ -1,36 +1,41 @@
-// Gera os indicadores (bolinhas) do carrossel conforme o número de fotos
-const carrossel = document.querySelector<HTMLElement>("#carrossel");
+// Bolinhas do carrossel (uma por foto)
 const indicadores = document.querySelector<HTMLElement>("#indicadores");
 
-if (carrossel && indicadores) {
-  const slides = carrossel.querySelectorAll<HTMLElement>(".carousel-item");
+document.querySelectorAll("#carrossel .carousel-item").forEach((_, i) => {
+  const botao = document.createElement("button");
+  botao.type = "button";
+  botao.dataset.bsTarget = "#carrossel";
+  botao.dataset.bsSlideTo = String(i);
+  botao.setAttribute("aria-label", `Ir para o desenho ${i + 1}`);
 
-  slides.forEach((_, i) => {
-    const botao = document.createElement("button");
-    botao.type = "button";
-    botao.dataset.bsTarget = "#carrossel";
-    botao.dataset.bsSlideTo = String(i);
-    botao.setAttribute("aria-label", `Ir para o desenho ${i + 1}`);
+  if (i === 0) {
+    botao.className = "active";
+    botao.setAttribute("aria-current", "true");
+  }
 
-    if (i === 0) {
-      botao.classList.add("active");
-      botao.setAttribute("aria-current", "true");
-    }
+  indicadores?.appendChild(botao);
+});
 
-    indicadores.appendChild(botao);
-  });
-}
-
-// Fecha o menu mobile ao clicar em um link
+// Fecha o menu do celular ao clicar num link
 const menu = document.querySelector<HTMLElement>("#menu");
 const toggler = document.querySelector<HTMLButtonElement>(".navbar-toggler");
 
-document
-  .querySelectorAll<HTMLAnchorElement>("#menu .nav-link")
-  .forEach((link) => {
-    link.addEventListener("click", () => {
-      if (menu?.classList.contains("show")) {
-        toggler?.click();
+document.querySelectorAll("#menu .nav-link").forEach((link) =>
+  link.addEventListener("click", () => {
+    if (menu?.classList.contains("show")) toggler?.click();
+  })
+);
+
+// Caixas caindo ao rolar (anima uma vez só)
+const observador = new IntersectionObserver(
+  (entradas) =>
+    entradas.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        observador.unobserve(e.target);
       }
-    });
-  });
+    }),
+  { threshold: 0.15 }
+);
+
+document.querySelectorAll(".reveal").forEach((el) => observador.observe(el));

@@ -1,14 +1,13 @@
+/* Cores */
 :root {
-  --fundo: #5f5d5d;          /* cinza com contraste adequado para o texto claro */
-  --fundo-2: #161616;
-  --texto: #f2f2f2;
-  --destaque: #c8102e;       /* vermelho; troque pela cor que ele preferir */
+  --fundo: #190303;
+  --fundo-2: #544f4f;
+  --texto: #e9e1e1;
+  --destaque: #c8102e;
   --destaque-hover: #e0203f;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background-color: var(--fundo);
@@ -16,33 +15,21 @@ body {
   font-family: "Poppins", system-ui, sans-serif;
 }
 
-/* Evita que a navbar fixa cubra o título da seção ao navegar pelo menu */
-section,
-header {
-  scroll-margin-top: 70px;
-}
+/* espaço pra navbar fixa não cobrir o título */
+section, header { scroll-margin-top: 70px; }
 
-/* Foco visível para navegação por teclado */
-a:focus-visible,
-button:focus-visible {
+a:focus-visible, button:focus-visible {
   outline: 3px solid var(--destaque-hover);
   outline-offset: 3px;
 }
 
 /* Navbar */
 .navbar {
-  background-color: rgba(13, 13, 13, 0.92);
+  background-color: rgba(25, 23, 23, 0.92);
   backdrop-filter: blur(6px);
 }
-
-.navbar-brand {
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.nav-link:hover {
-  color: var(--destaque-hover) !important;
-}
+.navbar-brand { font-weight: 700; letter-spacing: 1px; }
+.nav-link:hover { color: var(--destaque-hover) !important; }
 
 /* Hero */
 .hero {
@@ -53,20 +40,15 @@ button:focus-visible {
     linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)),
     url("img/fotofundo.png") center / cover no-repeat;
 }
+.destaque { color: var(--destaque-hover); }
 
-.destaque {
-  color: var(--destaque-hover);
-}
-
-/* Botões */
-
+/* Botão */
 .btn-destaque {
   background-color: var(--destaque);
   border-color: var(--destaque);
   color: #fff;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
-
 .btn-destaque:hover {
   background-color: var(--destaque-hover);
   border-color: var(--destaque-hover);
@@ -75,18 +57,12 @@ button:focus-visible {
   box-shadow: 0 8px 20px rgba(200, 16, 46, 0.45);
 }
 
-.btn-destaque:active {
-  transform: translateY(-1px);
-}
-
-/* Seções */
+/* Títulos das seções */
 .titulo-secao {
+  display: inline-block;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  position: relative;
-  display: inline-block;
 }
-
 .titulo-secao::after {
   content: "";
   display: block;
@@ -95,22 +71,15 @@ button:focus-visible {
   background-color: var(--destaque);
   margin-top: 6px;
 }
-
-.text-center .titulo-secao::after {
-  margin-left: auto;
-  margin-right: auto;
-}
+.text-center .titulo-secao::after { margin-inline: auto; }
 
 .secao-escura {
-  background-color: var(--fundo-2);
+  background: url("img/fundo-3-carvao.jpg") center / cover;
+  color: #fff;
 }
 
 /* Carrossel */
-.carrossel {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
+.carrossel { max-width: 720px; margin: 0 auto; }
 .carrossel .carousel-item img {
   width: 100%;
   height: min(500px, 70vh);
@@ -118,83 +87,87 @@ button:focus-visible {
   background-color: #000;
   border-radius: 12px;
 }
-
-.carousel-indicators [data-bs-target] {
-  background-color: var(--destaque-hover);
-}
+.carousel-indicators [data-bs-target] { background-color: var(--destaque-hover); }
 
 /* Contato */
 .card-contato {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 1.5rem 1rem;
-  background-color: var(--fundo-2);
+  gap: 4px;
+  padding: 0.8rem;
+  background: url("img/fundo-3-carvao.jpg") center / cover;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  border-radius: 10px;
   color: var(--texto);
-}
-
-.card-contato i {
-  font-size: 2.2rem;
-  color: var(--destaque-hover);
-}
-
-.card-contato .valor {
-  font-size: 1.05rem;
-  letter-spacing: 0.5px;
-}
-
-a.card-contato {
+  font-size: 0.9rem;
   text-decoration: none;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
-
-a.card-contato:hover {
+.card-contato:hover {
   transform: translateY(-4px);
   border-color: var(--destaque);
   color: var(--texto);
 }
+.card-contato i { font-size: 1.5rem; color: var(--destaque-hover); }
+.card-contato .valor { font-size: 1.05rem; letter-spacing: 0.5px; }
 
 /* Rodapé */
-.rodape {
-  background-color: var(--fundo-2);
-  color: #b5b5b5;
-}
+.rodape { background-color: var(--fundo-2); color: #b5b5b5; }
 
-/* Fade-in da frase */
+/* Fade-in da frase do hero */
 .fade-1 {
   display: inline-block;
   opacity: 0;
-  animation: aparecer 3.2s ease forwards;
-  animation-delay: 0.8s;
+  animation: aparecer 3.2s ease 0.8s forwards;
 }
-
 @keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Respeita quem prefere menos animação */
+/* Caixas caindo ao rolar (a classe "visible" vem do main.ts) */
+.reveal {
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Sem animação pra quem desativa no sistema */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .fade-1 {
-    animation: none;
-    opacity: 1;
-  }
-
-  a.card-contato {
-    transition: none;
-  }
+  html { scroll-behavior: auto; }
+  .fade-1, .reveal { animation: none; opacity: 1; transform: none; transition: none; }
+  .card-contato { transition: none; }
 }
 
+.reveal .titulo-secao::after {
+  width: 0;
+  transition: width 0.8s ease 0.3s;
+}
+.reveal.visible .titulo-secao::after { width: 50%; }
+
+.card-contato i { transition: transform 0.2s ease; }
+.card-contato:hover i { transform: scale(1.2) rotate(-8deg); }
+
+.navbar-brand i {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.navbar-brand:hover i { transform: rotate(-20deg) scale(1.2); }
+
+.nav-link { position: relative; }
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 2px;
+  height: 2px;
+  background-color: var(--destaque-hover);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover::after { transform: scaleX(1); }
