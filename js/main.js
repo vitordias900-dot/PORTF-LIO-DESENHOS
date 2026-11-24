@@ -1,4 +1,21 @@
 "use strict";
+// Fotos do carrossel (geradas por um laço)
+const TOTAL_FOTOS = 15;
+const carrosselFotos = document.getElementById("carrossel-fotos");
+if (carrosselFotos) {
+    for (let i = 1; i <= TOTAL_FOTOS; i++) {
+        const item = document.createElement("div");
+        item.className = i === 1 ? "carousel-item active" : "carousel-item";
+        const img = document.createElement("img");
+        img.src = `img/foto${i}.png`;
+        img.alt = `Desenho autoral ${i} de ${TOTAL_FOTOS}`;
+        img.decoding = "async";
+        if (i > 1)
+            img.loading = "lazy";
+        item.appendChild(img);
+        carrosselFotos.appendChild(item);
+    }
+}
 // Bolinhas do carrossel (uma por foto)
 const indicadores = document.querySelector("#indicadores");
 document.querySelectorAll("#carrossel .carousel-item").forEach((_, i) => {
